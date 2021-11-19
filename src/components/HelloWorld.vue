@@ -1,15 +1,23 @@
 <template>
-  <div class="hello">
-    
+  <div>
+    <div class="hello">
+      <h1>counter</h1>
+      <h1>{{ counterValue }}</h1>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue } from "vue-property-decorator";
+import { namespace } from "vuex-class";
+const Counter = namespace("Counter");
 
 @Component
 export default class HelloWorld extends Vue {
   @Prop() private msg!: string;
+
+  @Counter.Getter
+  public counterValue!: number;
 }
 </script>
 

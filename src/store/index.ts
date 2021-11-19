@@ -1,15 +1,14 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+// Vuex store that contains all the modules
 
-Vue.use(Vuex)
+import Vue from "vue";
+import Vuex from "vuex";
+
+import Counter from "./modules/auth.module";
+
+Vue.use(Vuex);
 
 export default new Vuex.Store({
-  state: {
-  },
-  mutations: {
-  },
-  actions: {
-  },
   modules: {
-  }
-})
+    Counter,
+  },
+});
