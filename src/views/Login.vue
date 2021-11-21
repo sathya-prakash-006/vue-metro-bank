@@ -5,17 +5,9 @@
       <h1>Micro Bank</h1>
     </div>
     <div>
-      <h1>Create an Account</h1>
+      <h1>Login</h1>
       <div>
         <form name="form" @submit.prevent="handleRegister">
-          <div>
-            <label>Fullname:</label>
-            <input v-model="user.name" type="text" name="name" />
-          </div>
-          <div>
-            <label>Date of incorparation:</label>
-            <input v-model="user.date" type="date" name="date" />
-          </div>
           <div>
             <label>Email:</label>
             <input v-model="user.email" type="text" name="email" />
@@ -23,14 +15,6 @@
           <div>
             <label>Password:</label>
             <input v-model="user.password" type="password" name="password" />
-          </div>
-          <div>
-            <label>Confirm Password:</label>
-            <input
-              v-model="user.confirmpassword"
-              type="password"
-              name="confirmpassword"
-            />
           </div>
           <div v-if="errors.length" class="error">
             Please correct the following error(s):
@@ -50,25 +34,24 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
 import { namespace } from "vuex-class";
 const User = namespace("User");
 
 @Component({
-  components: {},
+  components: {
+    HelloWorld,
+  },
 })
-export default class Register extends Vue {
+export default class Login extends Vue {
   private user: any = {
-    name: "",
-    date: "",
     email: "",
     password: "",
-    confirmpassword: "",
   };
   private errors: any = [];
 
   @User.Action
-  // private createRegisterAction!: (data: any) => void;
-  private register!: (data: any) => void;
+  private login!: (data: any) => void;
 
   handleRegister() {
     // error validation
@@ -76,24 +59,17 @@ export default class Register extends Vue {
     console.log(this.user);
     this.errors = [];
 
-    if (!this.user.name) {
-      this.errors.push("Name required");
-    }
     if (!this.user.email) {
       this.errors.push("Email required");
     } else if (!this.validEmail(this.user.email)) {
       this.errors.push("valid email required");
     }
-    if (
-      this.user.password !== this.user.confirmpassword ||
-      !this.user.password ||
-      !this.user.confirmpassword
-    ) {
-      this.errors.push("Entered password is not matching");
+    if (this.user.password === "") {
+      this.errors.push("password can't be empty");
     }
     if (!this.errors.length) {
-      this.register(this.user);
-      this.$router.push("/login");
+      this.login(this.user);
+      this.$router.push("/");
       return true;
     }
   }

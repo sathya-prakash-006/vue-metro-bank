@@ -7,7 +7,9 @@ const routes: Array<RouteConfig> = [
   {
     path: "/",
     name: "Home",
-    redirect: "/register",
+    // redirect: "/register",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Home.vue"),
   },
   {
     path: "/register",
@@ -17,6 +19,13 @@ const routes: Array<RouteConfig> = [
     // which is lazy-loaded when the route is visited.
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Register.vue"),
+  },
+  {
+    path: "/login",
+    name: "Login",
+    // redirect: "/register",
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Login.vue"),
   },
 ];
 
