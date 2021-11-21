@@ -5,7 +5,7 @@ Vue.use(VueRouter);
 
 const routes: Array<RouteConfig> = [
   {
-    path: "/",
+    path: "/dashbord",
     name: "Home",
     // redirect: "/register",
     component: () =>
@@ -27,6 +27,7 @@ const routes: Array<RouteConfig> = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Login.vue"),
   },
+  { path: "/:notFound(.*)", redirect: "/login" },
 ];
 
 const router = new VueRouter({

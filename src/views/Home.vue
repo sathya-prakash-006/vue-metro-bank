@@ -54,6 +54,9 @@
         </div>
       </form>
     </div>
+    <div>
+      <button class="exit-btn btn" @click="exit()">EXIT</button>
+    </div>
   </div>
 </template>
 
@@ -86,6 +89,9 @@ export default class Home extends Vue {
 
   toggleUpdate() {
     this.toggle = !this.toggle;
+  }
+  exit() {
+    this.$router.push("/login");
   }
 
   updateProfile() {
@@ -128,6 +134,9 @@ export default class Home extends Vue {
   height: 45px;
   margin-top: 50px;
   margin-bottom: 50px;
+}
+.exit-btn {
+  background-color: rgb(179, 174, 174);
 }
 .form-cont {
   width: 40%;

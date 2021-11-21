@@ -23,8 +23,11 @@
             </ul>
           </div>
           <div>
-            <button>Create an Account</button>
+            <button>Login</button>
           </div>
+          <router-link to="/register"
+            >Don't have an account ? Create an Account</router-link
+          >
         </form>
       </div>
     </div>
@@ -69,7 +72,7 @@ export default class Login extends Vue {
     }
     if (!this.errors.length) {
       this.login(this.user);
-      this.$router.push("/");
+      this.$router.push("/dashbord");
       return true;
     }
   }

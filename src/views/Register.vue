@@ -41,6 +41,7 @@
           <div>
             <button>Create an Account</button>
           </div>
+          <router-link to="/login">Already have an Account? Login</router-link>
         </form>
       </div>
     </div>
