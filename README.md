@@ -10,19 +10,14 @@ npm install
 npm run serve
 ```
 
-### Compiles and minifies for production
+### To run mock server
 ```
-npm run build
+json-server --watch db.json
 ```
 
 ### Run your unit tests
 ```
 npm run test:unit
-```
-
-### Lints and fixes files
-```
-npm run lint
 ```
 
 ### Customize configuration
