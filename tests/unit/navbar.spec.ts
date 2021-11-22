@@ -10,3 +10,9 @@ describe("Navbar.vue", () => {
     expect(wrapper.text()).toMatch(name);
   });
 });
+
+// arrange - declare a variable
+
+// act - click a button or fill some text
+
+// assert - check expectations
