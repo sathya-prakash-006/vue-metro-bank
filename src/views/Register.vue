@@ -51,30 +51,32 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import { ProfileUser } from "../utility/types";
 import { namespace } from "vuex-class";
 const User = namespace("User");
+import { validEmail } from "../utility/validateEmail";
 
 @Component({
   components: {},
 })
 export default class Register extends Vue {
-  private user: any = {
+  private user: ProfileUser = {
     name: "",
-    date: "",
+    date: new Date(),
     email: "",
     password: "",
     confirmpassword: "",
   };
-  private errors: any = [];
+  private errors: Array<string> = [];
 
   @User.Action
   // private createRegisterAction!: (data: any) => void;
-  private register!: (data: any) => void;
+  private register!: (data: ProfileUser) => void;
 
-  handleRegister() {
+  handleRegister(): void {
     // error validation
 
-    console.log(this.user);
+    //console.log(this.user);
     this.errors = [];
 
     if (!this.user.name) {
@@ -82,8 +84,8 @@ export default class Register extends Vue {
     }
     if (!this.user.email) {
       this.errors.push("Email required");
-    } else if (!this.validEmail(this.user.email)) {
-      this.errors.push("valid email required");
+    } else if (!validEmail(this.user.email)) {
+      this.errors.push("Enter valid Email Id");
     }
     if (
       this.user.password !== this.user.confirmpassword ||
@@ -95,13 +97,7 @@ export default class Register extends Vue {
     if (!this.errors.length) {
       this.register(this.user);
       this.$router.push("/login");
-      return true;
     }
-  }
-  validEmail(email: any) {
-    var re =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
   }
 }
 </script>

@@ -1,13 +1,13 @@
 <template>
   <div class="home">
-    <nav-bar :name="userDetails.name"></nav-bar>
+    <nav-bar :name="userDetails.name[0]"></nav-bar>
     <div>
       <h1>PROFILE DETAILS</h1>
     </div>
     <section class="summary-cont">
       <span>
         <p>Account Number</p>
-        <h5>674752528577</h5>
+        <h5>{{ AccoountNum() }}</h5>
       </span>
       <span>
         <p>Income</p>
@@ -22,7 +22,7 @@
     <section v-if="userDetails" class="profile">
       <span>
         <p>Name</p>
-        <h4>{{ userDetails.name }}</h4>
+        <h4>{{ userDetails.name.toUpperCase() }}</h4>
       </span>
       <span>
         <p>Email</p>
@@ -63,6 +63,7 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import NavBar from "../components/Navbar.vue";
+import { UpdateUser, ProfileUser } from "../utility/types";
 import { namespace } from "vuex-class";
 const User = namespace("User");
 
@@ -74,27 +75,31 @@ const User = namespace("User");
 export default class Home extends Vue {
   public toggle = false;
 
-  private user: any = {
+  private user: UpdateUser = {
     name: "",
     email: "",
   };
-  private errors: any = [];
+  private errors: Array<string> = [];
+
+  AccoountNum(): number {
+    return Math.floor(Math.random() * 1000000000);
+  }
 
   @User.Action
-  private update!: (data: any) => void;
+  private update!: (data: UpdateUser) => void;
 
   @User.Getter
-  public userDetails!: any;
+  public userDetails!: ProfileUser;
   public error!: boolean;
 
-  toggleUpdate() {
-    this.toggle = !this.toggle;
+  toggleUpdate(): boolean {
+    return (this.toggle = !this.toggle);
   }
-  exit() {
+  exit(): void {
     this.$router.push("/login");
   }
 
-  updateProfile() {
+  updateProfile(): void {
     const user = {
       name: this.user.name,
       email: this.user.email,
@@ -107,16 +112,13 @@ export default class Home extends Vue {
     } else if (!this.validEmail(this.user.email)) {
       this.errors.push("valid email required");
     }
-    if (this.user.password === "") {
-      this.errors.push("password can't be empty");
-    }
     if (!this.errors.length) {
       this.update(user);
       this.toggle = false;
     }
   }
 
-  validEmail(email: any) {
+  validEmail(email: string): boolean {
     var re =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(email);
@@ -158,7 +160,8 @@ input {
   border-radius: 12px;
   border: none;
 }
-.summary-cont {
+.summary-cont,
+.profile {
   display: flex;
   justify-content: space-around;
   align-items: center;

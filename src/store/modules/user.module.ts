@@ -1,9 +1,10 @@
 import { VuexModule, Module, Mutation, Action } from "vuex-module-decorators";
 import UserService from "../../services/user";
+import { ProfileUser } from "../../utility/types";
 
 @Module({ namespaced: true })
 class User extends VuexModule {
-  public user = [];
+  public user: Array<ProfileUser> = [];
   public error = false;
 
   @Mutation
@@ -21,7 +22,7 @@ class User extends VuexModule {
   public loginSuccess(user: any): void {
     this.error = false;
     this.user = user;
-    console.log(user);
+    //console.log(user);
   }
 
   @Mutation
@@ -54,7 +55,7 @@ class User extends VuexModule {
   // login
 
   @Action({ rawError: true })
-  login(data: any): Promise<any> {
+  login(data: ProfileUser): Promise<any> {
     return UserService.login(data.email, data.password).then(
       (user) => {
         this.context.commit("loginSuccess", user);

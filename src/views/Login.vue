@@ -38,7 +38,9 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
+import { LoginUser } from "../utility/types";
 import { namespace } from "vuex-class";
+import { validEmail } from "../utility/validateEmail";
 const User = namespace("User");
 
 @Component({
@@ -47,16 +49,16 @@ const User = namespace("User");
   },
 })
 export default class Login extends Vue {
-  private user: any = {
+  private user: LoginUser = {
     email: "",
     password: "",
   };
-  private errors: any = [];
+  private errors: Array<string> = [];
 
   @User.Action
-  private login!: (data: any) => void;
+  private login!: (data: LoginUser) => void;
 
-  handleRegister() {
+  handleRegister(): void {
     // error validation
 
     console.log(this.user);
@@ -64,7 +66,7 @@ export default class Login extends Vue {
 
     if (!this.user.email) {
       this.errors.push("Email required");
-    } else if (!this.validEmail(this.user.email)) {
+    } else if (!validEmail(this.user.email)) {
       this.errors.push("valid email required");
     }
     if (this.user.password === "") {
@@ -73,13 +75,7 @@ export default class Login extends Vue {
     if (!this.errors.length) {
       this.login(this.user);
       this.$router.push("/dashbord");
-      return true;
     }
-  }
-  validEmail(email: any) {
-    var re =
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
   }
 }
 </script>
