@@ -4,15 +4,13 @@
 ```
 npm install
 ```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
 ### To run mock server
 ```
 json-server --watch db.json
+```
+### Compiles and hot-reloads for development
+```
+npm run serve
 ```
 
 ### Run your unit tests
