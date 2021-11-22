@@ -4,15 +4,13 @@
 ```
 npm install
 ```
-
+### To run mock server
+```
+json-server --watch db.json
+```
 ### Compiles and hot-reloads for development
 ```
 npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
 ```
 
 ### Run your unit tests
@@ -20,10 +18,15 @@ npm run build
 npm run test:unit
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
+## Snapshots 
+
+![Screenshot (1)](https://github.com/sathya-prakash-006/vue-metro-bank/blob/main/Screenshot%20(54).png)
+
+![Screenshot (2)](https://github.com/sathya-prakash-006/vue-metro-bank/blob/main/Screenshot%20(55).png)
+
+![Screenshot (3)](https://github.com/sathya-prakash-006/vue-metro-bank/blob/main/Screenshot%20(56).png)
+
+![Screenshot (3)](https://github.com/sathya-prakash-006/vue-metro-bank/blob/main/Screenshot%20(57).png)
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
