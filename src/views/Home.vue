@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <nav-bar :name="userDetails.name[0]"></nav-bar>
-    <div>
+    <div data-test="title">
       <h1>PROFILE DETAILS</h1>
     </div>
     <section class="summary-cont">
@@ -75,7 +75,7 @@ const User = namespace("User");
 export default class Home extends Vue {
   public toggle = false;
 
-  private user: UpdateUser = {
+  public user: UpdateUser = {
     name: "",
     email: "",
   };

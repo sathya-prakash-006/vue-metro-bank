@@ -2,10 +2,10 @@
   <div class="container">
     <div class="left-container">
       <div class="logo-container"></div>
-      <h1>Micro Bank</h1>
+      <h1 data-test="title">Micro Bank</h1>
     </div>
     <div>
-      <h1>Create an Account</h1>
+      <h1 data-test="create-account">Create an Account</h1>
       <div>
         <form name="form" @submit.prevent="handleRegister">
           <div>
