@@ -9,7 +9,7 @@ describe("Register.vue", () => {
     expect(title.text()).toBe("Micro Bank");
   });
 
-  it("it should contain title 'Create an Account'", () => {
+  it("it should contain form title 'Create an Account'", () => {
     const wrapper = mount(Register);
     const createaccount = wrapper.get('[data-test="create-account"]');
 
